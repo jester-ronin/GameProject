@@ -1,22 +1,27 @@
+import { GameCycle } from '@eliya-56/canvas-engine';
 import { TetrisEngine } from '@eliya-56/canvas-engine';
+import ArkanodGame from '../ArkanoidGame'; 
 
 let engine = new TetrisEngine(document.body);
-engine.turnOnField(1, 2);
-engine.setHeaderText("String")
+let game = new ArkanodGame(engine, 0, 0);
+let cycle = new GameCycle(game);
 
-let y = 0;
-let x = 0;
 
-setInterval(() => { 
-    engine.turnOnField(x++,y++);
-    if (x === engine.columnCount){
-        x = 0;
-    }
+cycle.start();
 
-    if (y === engine.rowCount) {
-        y = 0;
-    }
-}, 2000);
+// let y = 0;
+// let x = 0;
+
+// setInterval(() => { 
+//     engine.turnOnField(x++,y++);
+//     if (x === engine.columnCount){
+//         x = 0;
+//     }
+
+//     if (y === engine.rowCount) {
+//         y = 0;
+//     }
+// }, 2000);
 
 
 // get rowCount() {
