@@ -7,6 +7,10 @@ export default class Point {
         this._pastPointY = pastPointY;
     }
 
+    // keyHandler(key) {
+
+    // }
+
     _calculate() {
         this._pastPointX = this._x++;
         this._pastPointY = this._y++;

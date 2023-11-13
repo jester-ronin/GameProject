@@ -6,11 +6,18 @@
 // создать новую стереть прошлую
 
 import Point from "./src/point";
+import Desk from "./src/Desk";
 
 export default class ArkanodGame {
     constructor(engine) {
         this._engine = engine;
         this._point = new Point(engine, 1, 1, 0, 0);
+        this._desk = new Desk(engine);
+
+        this._engine.keyboardHandler = (key) => {
+            //this._point.keyboardHandler(key);
+            this._desk.keyHandler(key)
+        }
     }
 
     _calculate() {
@@ -34,7 +41,8 @@ export default class ArkanodGame {
             // this._engine.turnOnField(this._x, this._y);
             // this._engine.turnOffField(this._pastPointX, this._pastPointY);
             this._engine.setHeaderText("Кадры " + frameCount);
-            this._point.render()
+            this._point.render();
+            this._desk.render();
         }
     }
 }
