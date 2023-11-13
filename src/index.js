@@ -1,9 +1,9 @@
 import { GameCycle } from '@eliya-56/canvas-engine';
 import { TetrisEngine } from '@eliya-56/canvas-engine';
-import ArkanodGame from '../ArkanoidGame'; 
+import ArkanodGame from '../ArkanoidGame';
 
 let engine = new TetrisEngine(document.body);
-let game = new ArkanodGame(engine, 0, 0);
+let game = new ArkanodGame(engine);
 let cycle = new GameCycle(game);
 
 
@@ -12,7 +12,7 @@ cycle.start();
 // let y = 0;
 // let x = 0;
 
-// setInterval(() => { 
+// setInterval(() => {
 //     engine.turnOnField(x++,y++);
 //     if (x === engine.columnCount){
 //         x = 0;

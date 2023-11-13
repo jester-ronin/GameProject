@@ -5,28 +5,36 @@
 // внутри render вызвать calculate
 // создать новую стереть прошлую
 
+import Point from "./src/point";
+
 export default class ArkanodGame {
-    constructor(engine, x, y) {
+    constructor(engine) {
         this._engine = engine;
-        this.x = x;
-        this.y = y;
+        this._point = new Point(engine, 1, 1, 0, 0);
     }
 
     _calculate() {
-                if (this.x === this._engine.columnCount){
-                    this.x = 0;
-                }
-            
-                if (this.y === this._engine.rowCount) {
-                    this.y = 0;
-                }
+        // this._pastPointX = this._x++;
+        // this._pastPointY = this._y++;
+
+        // if (this._x === this._engine.columnCount - 1) {
+        //     this._x = 0;
+        //     this.pastPointX -= this._x
+        // }
+
+        // if (this._y === this._engine.rowCount - 1) {
+        //     this._y = 0;
+        //     this._pastPointY -= this._y
+        // }
     }
 
     render(frameCount, msFromLastFrame) {
         if (frameCount * 3 % 2 === 0) {
-            this._calculate();
-            this._engine.turnOnField(this.x++, this.y++)
-            this._engine.setHeaderText("Кадры " + frameCount)
+            // this._calculate();
+            // this._engine.turnOnField(this._x, this._y);
+            // this._engine.turnOffField(this._pastPointX, this._pastPointY);
+            this._engine.setHeaderText("Кадры " + frameCount);
+            this._point.render()
         }
     }
 }
