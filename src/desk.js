@@ -2,34 +2,43 @@ export default class Desk {
     constructor(engine) {
         this._engine = engine;
         this._startPoint = 10;
-        this._desk = [];
-        this._pastPoint = this._startPoint - 1;
+        this._desk = [this._startPoint, this._startPoint + 1, this._startPoint + 2, this._startPoint + 3];
+        this._past = [];
     }
+
+
+
+
 
 
     keyHandler(key) {
         switch (key.key) {
             case "ArrowRight":
-                this._pastPoint = this._startPoint++;
-                if (this._startPoint === this._engine.columnCount) {
-                    this._startPoint = 19;
-                    this._pastPoint -= this._startPoint;
+                if (this._desk[this._desk.length - 1] < this._engine.columnCount - 1) {
+                    this._past = this._desk;
+                    this._desk = this._desk.map(x => x + 1);
                 }
                 break;
             case "ArrowLeft":
-                this._pastPoint = this._startPoint--;
-                if (this._startPoint === this._engine.columnCount - 21) {
-                    this._startPoint = 1;
-                    this._pastPoint += this._startPoint;
+                if (this._desk[0] > 0) {
+                    this._past = this._desk;
+                    this._desk = this._desk.map(x => x - 1);
                 }
-                break;
+                break;  
         }
     }
 
 
     render() {
-        this._engine.turnOnField(this._startPoint, 19);
-        this._engine.turnOffField(this._pastPoint, 19);
+        for (let j = 0; j < this._past.length; j++) {
+            this._engine.turnOffField(this._past[j], 19);
+        }
+
+        for (let i = 0; i < this._desk.length; i++) {
+            this._engine.turnOnField(this._desk[i], 19);
+        }
+
+
     }
 
 }
