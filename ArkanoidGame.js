@@ -5,7 +5,7 @@ import SecondBoard from "./src/SecondBoard";
 export default class ArkanodGame {
     constructor(engine) {
         this._engine = engine;
-        this._point = new Point(engine, 5, 2, 0, 0);
+        this._point = new Point(engine, 5, 1, 0, 0);
         this._board = new Board(engine);
         this._secondBoard = new SecondBoard(engine)
 
@@ -17,9 +17,22 @@ export default class ArkanodGame {
 
     _calculate() {
         let pointCoordinate = this._point.getCoordinate();
-        console.log(pointCoordinate)
-        this._board.removeAllLine()
-        this._board.isBoardCoordinate(pointCoordinate)
+        console.log(pointCoordinate);
+        this._board.removeAllLine();
+        this._secondBoard.moveToBall(pointCoordinate);
+        let result = (this._board.isBoardCoordinate(pointCoordinate));
+        switch(result) {
+            case 1 :
+                this._point.changeDirectionX();
+                this._point.changeDirectionY();
+                break;
+            case 2 :
+                this._point.changeDirectionX(true);
+                this._point.changeDirectionY();
+                break;
+            case 0 :
+                break;
+        }
         
     }
 
@@ -29,7 +42,7 @@ export default class ArkanodGame {
             this._engine.setHeaderText("Кадры " + frameCount);
             this._point.render();
             this._board.render();
-            //this._secondBoard.render()
+            this._secondBoard.render()
         }
     }
 }

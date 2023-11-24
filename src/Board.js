@@ -1,7 +1,11 @@
+export const Left = 1;
+export const Right = 2;
+export const Out = 0;
+
 export default class Board {
     constructor(engine) {
         this._engine = engine;
-        this._startPoint = 10;
+        this._startPoint = 7;
         this._board = [this._startPoint, this._startPoint + 1, this._startPoint + 2, this._startPoint + 3];
         this._past = [];
     }
@@ -42,15 +46,21 @@ export default class Board {
     }
 
     isBoardCoordinate(pointCoordinate) {
-        if (this._board.includes(pointCoordinate.x)) {
-            console.log("Шарик совпадает с доской по X");
-        }
-        if (pointCoordinate.y === this._engine.rowCount - 2) {
-            console.log("Шарик совпадает с доской по Y");
+        //return this._board.includes(pointCoordinate.x) && pointCoordinate.y === this._engine.rowCount - 2;
+        if (this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) {
+            if(pointCoordinate.y === this._engine.rowCount - 2) {
+            return Left;
+            }
+        } else if (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x) {
+            if(pointCoordinate.y === this._engine.rowCount - 2) {
+            return Right;
+            }
+        } else {
+            return Out;
         }
     }
 
-
+    
 
 
     render() {
