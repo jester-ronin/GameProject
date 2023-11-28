@@ -1,6 +1,8 @@
-import Point from "./point";
+export const Left = 1;
+export const Right = 2;
+export const Out = 0;
 
-export default class SecondDesk {
+export default class SecondBoard {
     constructor(engine) {
         this._engine = engine;
         this._startPoint = 10;
@@ -13,7 +15,7 @@ export default class SecondDesk {
             this._past = this._board;
             this._board = this._board.map(x => x - 1);
         }
-        
+
 
         else if (this._board[this._board.length - 1] < this._engine.columnCount - 1) {
             this._past = this._board;
@@ -21,6 +23,35 @@ export default class SecondDesk {
         }
 
     }
+
+    // hitTheBall(pointCoordinate) {
+    //     if (this._board[0] - 1 === pointCoordinate.x || this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) {
+    //         if (pointCoordinate.y === this._engine.rowCount - 19) {
+    //             return Left;
+    //         }
+    //         else {
+    //             return Out;
+    //         }
+    //     }
+
+    //     if (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) {
+    //         if (pointCoordinate.y === this._engine.rowCount - 19) {
+    //             return Right;
+    //         }
+    //         else {
+    //             return Out;
+    //         }
+    //     }
+    // }
+
+
+
+
+    // isBoardCoordinate(pointCoordinate) {
+    //     //return this._board.includes(pointCoordinate.x) && pointCoordinate.y === this._engine.rowCount - 2;
+    //     return this.hitTheBall(pointCoordinate)
+    // }
+
 
 
     render() {

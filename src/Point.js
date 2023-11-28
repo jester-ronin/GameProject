@@ -57,24 +57,25 @@ export default class Point {
             x: this._x,
             y: this._y
         }
-        return (coordinate)
+        return coordinate;
     }
 
     changeDirectionX(item) {
-        if (!item || item === undefined) {
+        debugger
+        if (item === undefined) {
             this._directionX *= -1;
         }
         else {
-            this._directionX = 1;
+            this._directionX = item;
         }
     }
 
     changeDirectionY(item) {
-        if (!item || item === undefined) {
+        if (item === undefined) {
             this._directionY *= -1;
         }
         else {
-            this._directionY = 1;
+            this._directionY = -1;
         }
     }
 

@@ -5,7 +5,7 @@ export const Out = 0;
 export default class Board {
     constructor(engine) {
         this._engine = engine;
-        this._startPoint = 7;
+        this._startPoint = 5;
         this._board = [this._startPoint, this._startPoint + 1, this._startPoint + 2, this._startPoint + 3];
         this._past = [];
     }
@@ -45,22 +45,31 @@ export default class Board {
         }
     }
 
-    isBoardCoordinate(pointCoordinate) {
-        //return this._board.includes(pointCoordinate.x) && pointCoordinate.y === this._engine.rowCount - 2;
-        if (this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) {
-            if(pointCoordinate.y === this._engine.rowCount - 2) {
+    hitTheBall(pointCoordinate) {
+        if (
+            (this._board[0] - 1 === pointCoordinate.x || this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) &&
+            pointCoordinate.y === this._engine.rowCount - 2
+        ) {
             return Left;
-            }
-        } else if (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x) {
-            if(pointCoordinate.y === this._engine.rowCount - 2) {
-            return Right;
-            }
-        } else {
-            return Out;
         }
-    }
-
     
+        if (
+            (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) &&
+            pointCoordinate.y === this._engine.rowCount - 2
+        ) {
+            return Right;
+        }
+    
+        return Out;
+    }
+    
+    isBoardCoordinate(pointCoordinate) {
+        return this.hitTheBall(pointCoordinate);
+    }
+    
+       
+
+
 
 
     render() {
