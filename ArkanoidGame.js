@@ -27,7 +27,7 @@ export default class ArkanodGame {
                 this._point.changeDirectionY();
                 break;
             case Right :
-                this._point.changeDirectionX();
+                this._point.changeDirectionX(1);
                 this._point.changeDirectionY();
                 break;
             case Out :
