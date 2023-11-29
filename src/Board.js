@@ -45,29 +45,41 @@ export default class Board {
         }
     }
 
-    hitTheBall(pointCoordinate) {
-        if (
-            (this._board[0] - 1 === pointCoordinate.x || this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) &&
+    ballReachedLeftSideOfBoard(pointCoordinate) {
+        let ballReachedLeftSideOfBoard = (this._board[0] - 1 === pointCoordinate.x || this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) &&
             pointCoordinate.y === this._engine.rowCount - 2
-        ) {
+
+        if (ballReachedLeftSideOfBoard) {
             return Left;
         }
-    
-        if (
-            (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) &&
-            pointCoordinate.y === this._engine.rowCount - 2
-        ) {
+        else{
+            return Out
+        }
+    }
+
+    ballReachedRightSideOfBoard(pointCoordinate) {
+        let ballReachedRightSideOfBoard = (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) &&
+        pointCoordinate.y === this._engine.rowCount - 2
+
+        if(ballReachedRightSideOfBoard) {
             return Right;
         }
-    
-        return Out;
+        else{
+            return Out
+        }
     }
-    
+
+
+    hitTheBall(pointCoordinate) {
+        return  this.ballReachedLeftSideOfBoard(pointCoordinate) || this.ballReachedRightSideOfBoard(pointCoordinate);
+        
+    }
+
     isBoardCoordinate(pointCoordinate) {
         return this.hitTheBall(pointCoordinate);
     }
-    
-       
+
+
 
 
 

@@ -21,7 +21,6 @@ export default class ArkanodGame {
         this._board.removeAllLine();
         this._secondBoard.moveToBall(pointCoordinate);
         let result = (this._board.isBoardCoordinate(pointCoordinate));
-        debugger
         switch(result) {
             case Left :
                 this._point.changeDirectionX(-1);

@@ -61,7 +61,6 @@ export default class Point {
     }
 
     changeDirectionX(item) {
-        debugger
         if (item === undefined) {
             this._directionX *= -1;
         }
