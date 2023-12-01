@@ -52,27 +52,31 @@ export default class Board {
         if (ballReachedLeftSideOfBoard) {
             return Left;
         }
-        else{
+        else {
             return Out
         }
     }
 
     ballReachedRightSideOfBoard(pointCoordinate) {
         let ballReachedRightSideOfBoard = (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) &&
-        pointCoordinate.y === this._engine.rowCount - 2
+            pointCoordinate.y === this._engine.rowCount - 2
 
-        if(ballReachedRightSideOfBoard) {
+        if (ballReachedRightSideOfBoard) {
             return Right;
         }
-        else{
+        else {
             return Out
         }
     }
 
 
     hitTheBall(pointCoordinate) {
-        return  this.ballReachedLeftSideOfBoard(pointCoordinate) || this.ballReachedRightSideOfBoard(pointCoordinate);
-        
+        if (this.ballReachedLeftSideOfBoard(pointCoordinate)) {
+            return this.ballReachedLeftSideOfBoard(pointCoordinate)
+        }
+        else if (this.ballReachedRightSideOfBoard(pointCoordinate))
+            return this.ballReachedRightSideOfBoard(pointCoordinate)
+
     }
 
     isBoardCoordinate(pointCoordinate) {

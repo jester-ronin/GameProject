@@ -1,6 +1,7 @@
 import Point from "./src/point";
 import Board, { Left, Out, Right } from "./src/Board";
 import SecondBoard from "./src/SecondBoard";
+import Menu from "./Menu";
 
 export default class ArkanodGame {
     constructor(engine) {
@@ -8,10 +9,12 @@ export default class ArkanodGame {
         this._point = new Point(engine, 15, 3, 0, 0);
         this._board = new Board(engine);
         this._secondBoard = new SecondBoard(engine);
+        this._menu = new Menu(engine);
 
         this._engine.keyboardHandler = (key) => {
             //this._point.keyboardHandler(key);
             this._board.keyHandler(key);
+            this._menu.keyHandler(key);
         }
     }
 
@@ -21,19 +24,19 @@ export default class ArkanodGame {
         this._board.removeAllLine();
         this._secondBoard.moveToBall(pointCoordinate);
         let result = (this._board.isBoardCoordinate(pointCoordinate));
-        switch(result) {
-            case Left :
+        switch (result) {
+            case Left:
                 this._point.changeDirectionX(-1);
                 this._point.changeDirectionY();
                 break;
-            case Right :
+            case Right:
                 this._point.changeDirectionX(1);
                 this._point.changeDirectionY();
                 break;
-            case Out :
+            case Out:
                 break;
         }
-        
+
         // let resultForSecondBoard = (this._secondBoard.isBoardCoordinate(pointCoordinate));
         // switch(resultForSecondBoard) {
         //     case 1 :
@@ -53,11 +56,17 @@ export default class ArkanodGame {
 
     render(frameCount, msFromLastFrame) {
         if (frameCount * 3 % 2 === 0) {
-            this._calculate()
-            this._engine.setHeaderText("Кадры " + frameCount);
-            this._point.render();
-            this._board.render();
-            this._secondBoard.render()
+            this._menu.render();
+            this._engine.setHeaderText("1 to Pong | 2 for Arkanoid")
+            if (this._menu._isPong === true) {
+                this._menu.removeAllLine()
+                this._calculate()
+                this._engine.setHeaderText("Кадры " + frameCount);
+                this._point.render();
+                this._board.render();
+                this._secondBoard.render()
+            }
+
         }
     }
 }
