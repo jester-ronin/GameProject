@@ -27,6 +27,7 @@ export default class Menu {
 
 
     render() {
+        this._engine.setHeaderText("1 to Pong | 2 for Arkanoid")
         this._engine.turnOnField(2, 3);
         this._engine.turnOnField(2, 4);
         this._engine.turnOnField(2, 5);

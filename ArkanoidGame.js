@@ -2,6 +2,7 @@ import Point from "./src/point";
 import Board, { Left, Out, Right } from "./src/Board";
 import SecondBoard from "./src/SecondBoard";
 import Menu from "./Menu";
+import Bricks from "./Bricks";
 
 export default class ArkanodGame {
     constructor(engine) {
@@ -10,6 +11,7 @@ export default class ArkanodGame {
         this._board = new Board(engine);
         this._secondBoard = new SecondBoard(engine);
         this._menu = new Menu(engine);
+        this._bricks = new Bricks(engine);
 
         this._engine.keyboardHandler = (key) => {
             //this._point.keyboardHandler(key);
@@ -20,8 +22,6 @@ export default class ArkanodGame {
 
     _calculate() {
         let pointCoordinate = this._point.getCoordinate();
-        console.log(pointCoordinate);
-        this._board.removeAllLine();
         this._secondBoard.moveToBall(pointCoordinate);
         let result = (this._board.isBoardCoordinate(pointCoordinate));
         switch (result) {
@@ -39,17 +39,17 @@ export default class ArkanodGame {
 
         // let resultForSecondBoard = (this._secondBoard.isBoardCoordinate(pointCoordinate));
         // switch(resultForSecondBoard) {
-        //     case 1 :
-        //         this._point.changeDirectionX();
+        //     case Left :
+        //         this._point.changeDirectionX(-1);
         //         this._point.changeDirectionY();
         //         break;
-        //     case 2 :
-        //         this._point.changeDirectionX(true);
+        //     case Right :
+        //         this._point.changeDirectionX(1);
         //         this._point.changeDirectionY();
         //         break;
-        //     case 0 :
+        //     case Out :
         //         break;
-        // }
+        // } 
     }
 
 
@@ -57,14 +57,13 @@ export default class ArkanodGame {
     render(frameCount, msFromLastFrame) {
         if (frameCount * 3 % 2 === 0) {
             this._menu.render();
-            this._engine.setHeaderText("1 to Pong | 2 for Arkanoid")
             if (this._menu._isPong === true) {
                 this._menu.removeAllLine()
                 this._calculate()
                 this._engine.setHeaderText("Кадры " + frameCount);
                 this._point.render();
                 this._board.render();
-                this._secondBoard.render()
+                this._bricks.render();
             }
 
         }

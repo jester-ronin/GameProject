@@ -38,7 +38,7 @@ export default class Board {
         }
     }
 
-    removeAllLine() {
+    _removeAllLine() {
         for (let i = 0; i < this._engine.columnCount - 1; i++) {
             if (i != this._board.includes())
                 this._engine.turnOffField(i, 19)
@@ -70,7 +70,8 @@ export default class Board {
     }
 
 
-    hitTheBall(pointCoordinate) {
+
+    isBoardCoordinate(pointCoordinate) {
         if (this.ballReachedLeftSideOfBoard(pointCoordinate)) {
             return this.ballReachedLeftSideOfBoard(pointCoordinate)
         }
@@ -79,20 +80,13 @@ export default class Board {
 
     }
 
-    isBoardCoordinate(pointCoordinate) {
-        return this.hitTheBall(pointCoordinate);
-    }
-
-
 
 
 
 
     render() {
-        for (let j = 0; j < this._past.length; j++) {
-            this._engine.turnOffField(this._past[j], 19);
-        }
-
+        this._removeAllLine();
+                
         for (let i = 0; i < this._board.length; i++) {
             this._engine.turnOnField(this._board[i], 19);
         }

@@ -24,23 +24,27 @@ export default class SecondBoard {
 
     }
 
-    // hitTheBall(pointCoordinate) {
-    //     if (this._board[0] - 1 === pointCoordinate.x || this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) {
-    //         if (pointCoordinate.y === this._engine.rowCount - 19) {
-    //             return Left;
-    //         }
-    //         else {
-    //             return Out;
-    //         }
-    //     }
+    // ballReachedLeftSideOfBoard(pointCoordinate) {
+    //     let ballReachedLeftSideOfBoard = (this._board[0] - 1 === pointCoordinate.x || this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) &&
+    //         pointCoordinate.y === this._engine.rowCount - 2
 
-    //     if (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) {
-    //         if (pointCoordinate.y === this._engine.rowCount - 19) {
-    //             return Right;
-    //         }
-    //         else {
-    //             return Out;
-    //         }
+    //     if (ballReachedLeftSideOfBoard) {
+    //         return Left;
+    //     }
+    //     else {
+    //         return Out
+    //     }
+    // }
+
+    // ballReachedRightSideOfBoard(pointCoordinate) {
+    //     let ballReachedRightSideOfBoard = (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) &&
+    //         pointCoordinate.y === this._engine.rowCount - 2
+
+    //     if (ballReachedRightSideOfBoard) {
+    //         return Right;
+    //     }
+    //     else { 
+    //         return Out
     //     }
     // }
 
@@ -48,8 +52,12 @@ export default class SecondBoard {
 
 
     // isBoardCoordinate(pointCoordinate) {
-    //     //return this._board.includes(pointCoordinate.x) && pointCoordinate.y === this._engine.rowCount - 2;
-    //     return this.hitTheBall(pointCoordinate)
+    //     if (this.ballReachedLeftSideOfBoard(pointCoordinate)) {
+    //         return this.ballReachedLeftSideOfBoard(pointCoordinate)
+    //     }
+    //     else if (this.ballReachedRightSideOfBoard(pointCoordinate))
+    //         return this.ballReachedRightSideOfBoard(pointCoordinate)
+
     // }
 
 
