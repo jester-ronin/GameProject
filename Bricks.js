@@ -8,6 +8,7 @@ export default class Bricks {
     constructor(engine) {
         this.engine = engine;
         this.staticPoints = [];
+        this.score = 0;
         for (let i = GapX; i < engine.columnCount - GapX; i++) {
             for (let j = MarginTop; j < MarginTop + Height; j++) {
                 this.staticPoints.push(new StaticPoint(engine, i, j));
@@ -19,6 +20,7 @@ export default class Bricks {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+
     removeBrick(pointCoordinate) {
         const indexToRemove = this.staticPoints.findIndex(point => {
             return point.x === pointCoordinate.x && point.y === pointCoordinate.y;
@@ -27,8 +29,11 @@ export default class Bricks {
         if (indexToRemove !== -1) {
             this.staticPoints[indexToRemove].remove(this.staticPoints[indexToRemove].x, this.staticPoints[indexToRemove].y);
             this.staticPoints.splice(indexToRemove, 1);
-            let result = this.getRandomInt(0,1)
-            return result;
+            let result = this.getRandomInt(0, 1)
+            if (result) {
+                this.score += 100;
+                return result;
+            }
         }
 
         return false;
@@ -41,10 +46,7 @@ export default class Bricks {
         for (let i = 0; i < this.staticPoints.length; i++) {
             this.staticPoints[i].render();
         }
+        this.engine.setHeaderText(`Score ${this.score}`);
     }
 }
 
-
-//Метод удалящий кирпич по координатам
-// Кирпич должен совпадать с шариком
-// вернуть тру или фолс, если совпало, то

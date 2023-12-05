@@ -35,14 +35,6 @@ export default class ArkanodGame {
                 this._point.changeDirectionX(1);
                 this._point.changeDirectionY();
                 break;
-            case DoubleLeft:
-                this._point.changeDirectionX(-2);
-                this._point.changeDirectionY(-1);
-                break;
-            case DoubleRight:
-                this._point.changeDirectionX(2);
-                this._point.changeDirectionY(1);
-                break;
             case Out:
                 break;
         }
@@ -81,7 +73,6 @@ export default class ArkanodGame {
             if (this._menu._isPong === true) {
                 this._menu.removeAllLine()
                 this._calculate()
-                this._engine.setHeaderText("Кадры " + frameCount);
                 this._point.render();
                 this._board.render();
                 this._bricks.render();
