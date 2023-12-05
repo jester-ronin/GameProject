@@ -1,6 +1,8 @@
 export const Left = 1;
 export const Right = 2;
 export const Out = 0;
+export const DoubleLeft = 3;
+export const DoubleRight = 4;
 
 export default class Board {
     constructor(engine) {
@@ -46,26 +48,36 @@ export default class Board {
     }
 
     ballReachedLeftSideOfBoard(pointCoordinate) {
-        let ballReachedLeftSideOfBoard = (this._board[0] - 1 === pointCoordinate.x || this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) &&
-            pointCoordinate.y === this._engine.rowCount - 2
+        let ballReachedLeftSideOfBoard = (this._board[0] === pointCoordinate.x || this._board[1] === pointCoordinate.x) &&
+            pointCoordinate.y === this._engine.rowCount - 2;
+        let ballReachedLeftEdgeOfBoard = (this._board[0] - 1 === pointCoordinate.x) &&
+        pointCoordinate.y === this._engine.rowCount - 2;
 
         if (ballReachedLeftSideOfBoard) {
             return Left;
         }
+        else if (ballReachedLeftEdgeOfBoard) {
+            return DoubleLeft;
+        }
         else {
-            return Out
+            return Out;
         }
     }
 
     ballReachedRightSideOfBoard(pointCoordinate) {
-        let ballReachedRightSideOfBoard = (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x || this._board[3] + 1 === pointCoordinate.x) &&
+        let ballReachedRightSideOfBoard = (this._board[2] === pointCoordinate.x || this._board[3] === pointCoordinate.x) &&
+            pointCoordinate.y === this._engine.rowCount - 2;
+        let ballReachedRightEdgeOfBoard = (this._board[3] + 1 === pointCoordinate.x) &&
             pointCoordinate.y === this._engine.rowCount - 2
 
         if (ballReachedRightSideOfBoard) {
             return Right;
         }
+        else if (ballReachedRightEdgeOfBoard) {
+            return DoubleRight;
+        }
         else {
-            return Out
+            return Out;
         }
     }
 
@@ -86,7 +98,7 @@ export default class Board {
 
     render() {
         this._removeAllLine();
-                
+
         for (let i = 0; i < this._board.length; i++) {
             this._engine.turnOnField(this._board[i], 19);
         }

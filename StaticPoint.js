@@ -6,9 +6,12 @@ export default class StaticPoint {
 
     }
 
+    remove(x,y) {
+        this.engine.turnOffField(x,y);
+    }
+
     render() {
         this.engine.turnOnField(this.x, this.y);
     }
 }
 
-//метод remove (turn off) добавить

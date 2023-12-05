@@ -1,5 +1,5 @@
 import Point from "./src/point";
-import Board, { Left, Out, Right } from "./src/Board";
+import Board, { DoubleLeft, DoubleRight, Left, Out, Right } from "./src/Board";
 import SecondBoard from "./src/SecondBoard";
 import Menu from "./Menu";
 import Bricks from "./Bricks";
@@ -22,9 +22,11 @@ export default class ArkanodGame {
 
     _calculate() {
         let pointCoordinate = this._point.getCoordinate();
-        this._secondBoard.moveToBall(pointCoordinate);
-        let result = (this._board.isBoardCoordinate(pointCoordinate));
-        switch (result) {
+        //this._secondBoard.moveToBall(pointCoordinate);
+        let resultForBricks = (this._bricks.removeBrick(pointCoordinate));
+        let resultForBoard = (this._board.isBoardCoordinate(pointCoordinate));
+        console.log(resultForBricks)
+        switch (resultForBoard) {
             case Left:
                 this._point.changeDirectionX(-1);
                 this._point.changeDirectionY();
@@ -33,7 +35,26 @@ export default class ArkanodGame {
                 this._point.changeDirectionX(1);
                 this._point.changeDirectionY();
                 break;
+            case DoubleLeft:
+                this._point.changeDirectionX(-2);
+                this._point.changeDirectionY(-1);
+                break;
+            case DoubleRight:
+                this._point.changeDirectionX(2);
+                this._point.changeDirectionY(1);
+                break;
             case Out:
+                break;
+        }
+
+        switch (resultForBricks) {
+            case 0:
+                this._point.changeDirectionX(-1);
+                this._point.changeDirectionY();
+                break;
+            case 1:
+                this._point.changeDirectionX(1);
+                this._point.changeDirectionY();
                 break;
         }
 
