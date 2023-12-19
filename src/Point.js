@@ -74,9 +74,10 @@ export default class Point {
             this._directionY *= -1;
         }
         else {
-            this._directionY = -1;
+            this._directionY = item;
         }
     }
+    
 
     _calculate() {
         this.moveBall();

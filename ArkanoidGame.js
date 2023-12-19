@@ -7,7 +7,7 @@ import Bricks from "./Bricks";
 export default class ArkanodGame {
     constructor(engine) {
         this._engine = engine;
-        this._point = new Point(engine, 15, 3, 0, 0);
+        this._point = new Point(engine, 2, 12, 0, 0);
         this._board = new Board(engine);
         this._secondBoard = new SecondBoard(engine);
         this._menu = new Menu(engine);
@@ -20,12 +20,19 @@ export default class ArkanodGame {
         }
     }
 
+
+
+
     _calculate() {
         let pointCoordinate = this._point.getCoordinate();
-        //this._secondBoard.moveToBall(pointCoordinate);
-        let resultForBricks = (this._bricks.removeBrick(pointCoordinate));
-        let resultForBoard = (this._board.isBoardCoordinate(pointCoordinate));
-        console.log(resultForBricks)
+        let brickCoordinate = this._bricks.removeBrick(pointCoordinate);
+
+        if (brickCoordinate !== null) {
+            this._changeDirectionAfterBrick(brickCoordinate, pointCoordinate);
+        }
+
+        let resultForBoard = this._board.isBoardCoordinate(pointCoordinate);
+
         switch (resultForBoard) {
             case Left:
                 this._point.changeDirectionX(-1);
@@ -38,44 +45,36 @@ export default class ArkanodGame {
             case Out:
                 break;
         }
+    }
 
-        switch (resultForBricks) {
-            case 0:
-                this._point.changeDirectionX(-1);
-                this._point.changeDirectionY();
-                break;
-            case 1:
-                this._point.changeDirectionX(1);
-                this._point.changeDirectionY();
-                break;
+
+    _changeDirectionAfterBrick(brickCoordinate, pointCoordinate) {
+        debugger
+        if (pointCoordinate.y <= brickCoordinate.y) {
+            this._point.changeDirectionY(-1);
+        }
+        else {
+            this._point.changeDirectionY(1);
         }
 
-        // let resultForSecondBoard = (this._secondBoard.isBoardCoordinate(pointCoordinate));
-        // switch(resultForSecondBoard) {
-        //     case Left :
-        //         this._point.changeDirectionX(-1);
-        //         this._point.changeDirectionY();
-        //         break;
-        //     case Right :
-        //         this._point.changeDirectionX(1);
-        //         this._point.changeDirectionY();
-        //         break;
-        //     case Out :
-        //         break;
-        // } 
+        if (pointCoordinate.x <= brickCoordinate.x && this._point._directionX === 1) {
+            this._point.changeDirectionX(1);
+        } else {
+            this._point.changeDirectionX(-1);
+        }
     }
 
 
 
     render(frameCount, msFromLastFrame) {
-        if (frameCount * 3 % 2 === 0) {
+        if (frameCount % 3 === 0) {
             this._menu.render();
             if (this._menu._isPong === true) {
-                this._menu.removeAllLine()
-                this._calculate()
-                this._point.render();
+                this._menu.removeAllLine();
+                this._calculate();
                 this._board.render();
                 this._bricks.render();
+                this._point.render();
             }
 
         }

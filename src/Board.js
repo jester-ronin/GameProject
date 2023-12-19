@@ -54,6 +54,7 @@ export default class Board {
         }
         else {
             return Out
+            
         }
     }
 
@@ -88,7 +89,7 @@ export default class Board {
         this._removeAllLine();
                 
         for (let i = 0; i < this._board.length; i++) {
-            this._engine.turnOnField(this._board[i], 19);
+            this._engine.turnOnField(this._board[i], this._engine.rowCount - 1);
         }
 
 

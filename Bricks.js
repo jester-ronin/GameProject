@@ -29,15 +29,15 @@ export default class Bricks {
         if (indexToRemove !== -1) {
             this.staticPoints[indexToRemove].remove(this.staticPoints[indexToRemove].x, this.staticPoints[indexToRemove].y);
             this.staticPoints.splice(indexToRemove, 1);
-            let result = this.getRandomInt(0, 1)
-            if (result) {
-                this.score += 100;
-                return result;
-            }
+            this.score += 100;
+            let brickCoordinate = this.staticPoints[indexToRemove];
+            return brickCoordinate;
         }
 
-        return false;
+        return null
+
     }
+
 
 
 
