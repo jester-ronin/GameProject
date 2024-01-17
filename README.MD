@@ -19,9 +19,10 @@ Welcome! This project is a classic arcade game "Arkanoid" implemented in JavaScr
 - External Engine: Simplifying development and management of game elements.
 
 ## Screenshots
+Game play
+! [Game play](screenshots/gameplay1.PNG)
+! [Game play](screenshots/gameplay0.PNG)
 
-!(screenshots/gameplay0.PNG)
-!(screenshots/gameplay1.PNG)
 
 ## Running the Game:
 
