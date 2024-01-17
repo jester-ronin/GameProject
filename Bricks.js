@@ -27,10 +27,10 @@ export default class Bricks {
         });
 
         if (indexToRemove !== -1) {
+            let brickCoordinate = this.staticPoints[indexToRemove];
             this.staticPoints[indexToRemove].remove(this.staticPoints[indexToRemove].x, this.staticPoints[indexToRemove].y);
             this.staticPoints.splice(indexToRemove, 1);
             this.score += 100;
-            let brickCoordinate = this.staticPoints[indexToRemove];
             return brickCoordinate;
         }
 
@@ -39,6 +39,9 @@ export default class Bricks {
     }
 
 
+    isBrick(coordinate) {       
+        return this.staticPoints.some(point => point.x === coordinate.x && point.y === coordinate.y);
+    }
 
 
 

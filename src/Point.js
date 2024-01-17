@@ -10,19 +10,28 @@ export default class Point {
         this._directionY = 1;
     }
 
-    // keyHandler(key) {
-
-    // }
 
     moveBallByX() {
-        let xReachedEdge = this._x === 0 || this._x === this._engine.columnCount - 1;
+        let xReachedEdge = (this._x <= 0 || this._x === this._engine.columnCount - 1);
 
         if (xReachedEdge) {
             this.changeDirectionX();
         }
-
         this._pastPointX = this._x;
-        this._x += this._directionX
+
+
+        let preX = this._x + this._directionX;
+        if (preX >= 0 && preX < this._engine.columnCount) {
+            this._pastPointX = this._x;
+            this._x = preX;
+        }
+        else if (preX >= this._engine.columnCount) {
+            this._pastPointX = this._x;
+            this._x = this._engine.columnCount - 1;
+        }
+        else {
+            this._x = 0;
+        }
     }
 
     moveBallByY() {
@@ -55,9 +64,17 @@ export default class Point {
     getCoordinate() {
         let coordinate = {
             x: this._x,
-            y: this._y
+            y: this._y,
         }
         return coordinate;
+    }
+
+    getPastCoordinate() {
+        let pastCoordinate = {
+            x: this._pastPointX,
+            y: this._pastPointY,
+        }
+        return pastCoordinate;
     }
 
     changeDirectionX(item) {
@@ -77,7 +94,7 @@ export default class Point {
             this._directionY = item;
         }
     }
-    
+
 
     _calculate() {
         this.moveBall();
