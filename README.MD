@@ -20,8 +20,8 @@ Welcome! This project is a classic arcade game "Arkanoid" implemented in JavaScr
 
 ## Screenshots
 Game play
-! [Game play](screenshots/gameplay1.PNG)
-! [Game play](screenshots/gameplay0.PNG)
+![Game play](screenshots/gameplay1.PNG)
+![Game play](screenshots/gameplay0.PNG)
 
 
 ## Running the Game:
