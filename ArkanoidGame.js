@@ -98,22 +98,16 @@ export default class ArkanodGame {
         //const isBlockAbove =  
 
         // удар шарика снизу вверх ↑                             
-        if (movingDown && brickCoordinate.y + 1 >= 0 && movingLeft) {
-            this._point.changeDirectionX(-1); 
+        if (movingDown && movingLeft) {
+            this._point.changeDirectionX(-1);
             this._point.changeDirectionY(1);
-            if(brickCoordinate.x !== 0) {
-                this._point.changeDirectionX(+1);
-                this._point.changeDirectionY(-1);
-            }
+
         }
         // удар шарика снизу вверх ↑    
-        if (movingDown && brickCoordinate.y + 1 >= 0 && movingRight) {
+        if (movingDown && movingRight) {
             this._point.changeDirectionX(1);
             this._point.changeDirectionY(1);
-            if(brickCoordinate.x !== 0) {
-                this._point.changeDirectionX(-1);
-                this._point.changeDirectionY(-1);
-            }
+
         }
 
         //удар шарикa сверху вниз  ↓                                
